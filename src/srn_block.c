@@ -77,7 +77,6 @@ isblocked(char *usraddr)
                         "from=franck.lesage22@orange.fr " \
                         "smtp=smtps://smtp.sendgrid.net " \
                         "smtp-auth-user=apikey " \
-                        "smtp-auth-password='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' " \
                         "smtp-auth=login mailx -n -s STOCKRECUPNET_DAEMON_INFO " \
                         "effervecreanet@gmail.com < " \
                         "./SRN_MAIL_CONTENT_BLOCKED.txt");
