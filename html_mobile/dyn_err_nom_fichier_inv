@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="description" content="Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils (mobiles et ordis)." />
+        <title>StockRecup - Nom fichier invalide</title>
+</head>
+<body style="background: url('images/STOCKRECUP_MOBILE_BG.jpg') no-repeat top center fixed; background-size: 100% 100%; padding: 0; width: 100%; margin: 0 0;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 192px;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<h1 style="text-align: center;"><a style="margin:0 auto;padding:0;color:black;  letter-spacing: 1px; text-decoration: none;  font-weight: lighter; font-size:24px;" href="/"><span style="border-top: 2px solid red;">S</span>tock<span style="border-bottom: 2px solid red;">R</span>&eacute;cup</a></h1>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<a style="text-align:center; width: 50%; float:left;  font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/stockage"><span style="border-top: 1px solid red;">Stockage</span></a>
+<a style="text-align:center; width: 50%; float:right; font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/recuperation"><span style="border-bottom: 1px solid red;">R&eacute;cup&eacute;ration</span></a>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+</div>
+<h2 style="color: white;text-align:center;display: block; margin: 0; width: 100%; height: 100px;">Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils</h2>
+<div style="display: block; margin: 0; width: 100%;">
+
+
+<div style="display: block; background: url('images/STOCKRECUP_MOBILE_BG_FRAMES.jpg');background-size: 100% 100%;padding: 0; border: 1px solid rgb(0,64,142); font-size: 20px; margin: 10px auto; width: 96%; height: 200px">
+<p style="color: white; text-align:center;margin:64px 0;padding:0; ">Le nom de fichier est invalide. Soit aucun fichier n'a &eacute;t&eacute; s&eacute;lectionn&eacute; soit il contient des caract&egrave;res comme des espaces ou des lettres accentu&eacute;es.</p>
+</div>
+
+
+<div style="display: block; font-size: 20px; width: 96%; margin: 0 auto;height: 444px">
+<div style="display: block; background: url('images/STOCKRECUP_MOBILE_BG_FRAMES.jpg');background-size: 100% 100%;padding: 0; border: 1px solid rgb(0,64,128); font-size: 20px; margin: auto auto; width: 100%; height: 200px">
+<form style="display: block; padding: 0 0;text-align:center;margin: 0 auto; width: 94%;" name= "formulario1" action="/stockage" accept-charset="ISO-8859-1" method="post" enctype="multipart/form-data">
+<label for="archivatio" style="background-color:darkgrey;border-color:red;text-align:center;display:block;color: white;padding: 0;font-size: 21px;margin: 5% 10% 5% 10%; border-style: double;width: 80%;">S&eacute;lectionner le fichier &agrave; stocker</label>
+<input id="archivatio" style="display: none;" type="file" name="archivatio1" />
+<p style="margin: 5% 0 0 0; padding: 0; color: white;">Le fichier suivant sera stock&eacute;:</p>
+<p id="fn1" style="margin: 0 0 5% 0; padding: 0; color: white;">-</p>
+<label for="inviare" style="text-align:center;background-color:darkgrey;color: white;font-size: 21px; border-style: double;width:64%;margin: 2% 18% 0 18%;display:block;border-color: red;">Envoyer</label>
+<input onclick="func()" id="inviare" style="display:none;" type="submit" value="envoyer"/>
+</form>
+</div>
+<script>
+document.getElementById('archivatio').onchange = function () {
+        fn1.innerHTML = this.value.substring(this.value.lastIndexOf('\\') + 1);
+};
+function func() {
+        document.getElementById("waits").style.display = "none";
+        document.getElementById("tx").style.display = "block";
+}
+</script>
+<div style="font-size: 20px; display: block; width: 96%; height: auto; ">
+<p style="color: white; text-align:center;">Pour stocker un fichier, il vous suffit de cliquer sur le bouton <b>S&eacute;lectionner le fichier &agrave; stocker</b>.</p>
+<p style="color: white; text-align:center; ">Ensuite l'invite de s&eacute;lection ou de parcours de fichiers appara&icirc;trera sur votre &eacute;cran. Il vous faudra cliquer ou appuyer sur le label correspondant au fichier que vous voulez envoyer et stocker.</p>
+<p style="color: white; text-align:center; ">Un appui ou clic sur le bouton <b>Envoyer</b> d&eacute;marrera le transfert.</p>
+<p style="color: white; text-align:center; ">La fin de ce transfert d&eacute;pend de la qualit&eacute; ou du d&eacute;bit du r&eacute;seau sur lequel vous vous trouvez.</p>
+<p style="color: white; text-align:center; ">Le code de r&eacute;cup&eacute;ration sera ins&eacute;r&eacute; dans le rectangle o&ugrave; est inscrit <b>Attente de d&eacute;marrage du transfert</b>.</p>
+<p style="color: white; text-align:center; ">&nbsp;</p>
+</div>
+
+<p style="color: orange; font-size: 22px; width:100%;display:block;text-align: center;width: 100%;margin: 0; text-decoration:underline; "><a style="color:rgb(0,64,128);" href="/aide">Aide</a></p>
+
+<p style="display:block; width: 100%; color: purple; text-align:center;font-size:20px; height: 24px"><a href="https://www.effervecrea.net/cas-ou-scenarios-d-utilisations-possibles-et-intro-(stockrecup.net)" style="color:purple;text-decoration: none">Blog</a>&nbsp;<span style="color:white">-</span>&nbsp;<a href="/mentions-legales" style="color:purple;text-decoration: none">Mentions l&eacute;gales</a>&nbsp;<span style="color:white">-</span>&nbsp;<a href="mailto:effervecreanet@gmail.com" style="color:purple;text-decoration:none">Contact</a></p>
+
+<p>&nbsp;</p>
+
+
+<div id="RGPD" style="display:none;width:100%; height: auto; position: fixed; bottom: 0px;background: white; border-top: 1px solid darkgreen;padding: 0; ">
+<p style="text-align:center;font-size: 13px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a href="/RGPD_Refus">Refuser</a> ou <a href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+
+<script>
+
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</div>
+</body>
+</html>

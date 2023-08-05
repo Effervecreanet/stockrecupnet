@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="description" content="Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils (mobiles et ordis)." />
+        <title>StockR&eacute;cup - Stockage</title>
+<style>
+p { font-size: 120%; font-family: Arial; font-style: normal; }
+label { font-size: 120%; font-family: Arial; font-style: normal; }
+h1 { margin: 0; padding: 0; display: inline; font-size: 10px;}
+h2 { margin: 0; padding: 0; display: inline; font-size: 10px;}
+h3 { margin: 0; padding: 0; display: inline; font-size: 10px;}
+</style>
+</head>
+<body style="display: block; width: 100%; position: fixed; height: 98%; background: url('/images/STOCKRECUP_DESKTOP_BG_STOCKAGE.png') no-repeat; background-size: 100%; background-color: #99cc66;">
+<div style="height: 8.8%; width: 60%; margin: 2% auto; padding: 0 auto; display: block;">
+<h1><a style="margin: 0; padding: 0 0 0 0; color: black; display:inline;" href="/"><img title="Retour page Accueil" alt="Retour page Accueil" style="margin: 0; padding: 0; display: inline; width: 23%; height: 24%;" src="images/STOCKRECUP_MENU_ACCUEIL.png" /></a></h1>
+<h2><a style="margin: 0; padding: 0 0 0 0; color: black; display: inline;" href="/stockage"><img title="Acc&egrave;s stocker" alt="Acc&egrave;s stocker" style="margin: 0; padding: 0; width: 23%; height: 23%;" src="images/STOCKRECUP_MENU_STOCKAGE.png"/></a></h2>
+<h2><a style="margin: 0; padding: 0 0 0 0; color: black; display: inline;" href="/recuperation"><img title="Acc&egrave;s r&eacute;cup&eacute;ration" alt="Acc&egrave;s r&eacute;cup&eacute;ration"style="margin: 0; padding: 0; width: 23%; height: 23%;" src="images/STOCKRECUP_MENU_RECUPERATION.png"/></a></h2>
+<h3><a style="margin: 0; padding: 0 0 0 0; color: black; display: inilne;" href="/aide"><img title="Acc&egrave;s aide" alt="Acc&egrave;s aide" style="margin: 0; padding: 0; width: 23%; height: 23%;" src="images/STOCKRECUP_MENU_AIDE.png" /></a></h3>
+</div>
+<div style="border: 1px solid white; height: 33%; width: 32%; display: block; margin: 0 0 0 19%; padding: 0 0 0 0; background: url('images/STOCKRECUP_DESKTOP_BG_STOCKAGE_FRAMES.png') top left no-repeat; background-size: 100%;">
+<p style="text-align: center; color: white;">Le fichier existe d&eacute;j&agrave;.</p>
+<form style="display: block; padding: 0 0;text-align:center;margin: 4% 2%; height: 96%; width: 96%; padding: 1% 0 0 0;" name= "formulario1" action="/stockage" accept-charset="ISO-8859-1" method="post" enctype="multipart/form-data">
+<label for="archivatio" style="border-color:red;text-align:center;color: white;background-color:darkgrey;margin: 1% auto; height: auto; padding: 0;border-style: double; display: block;">S&eacute;lectionner le fichier &agrave; stocker</label>
+<p style="color: white; display: block; margin: 1% auto; height: auto; text-align:center; padding: 0; ">Le fichier suivant sera stock&eacute;:</p>
+<p id="fn1" style="color: white; display: block; margin: 1% auto; height: auto; text-align:center; padding: 0; ">-</p>
+<input id="archivatio" style="display: none;" type="file" name="archivatio1" />
+<label for="inviare" style="text-align:center;color: white; display: block; height: auto; margin: 3% 0; padding: 0; background-color:darkgrey;border-style: double;border-color: red;">Envoyer</label>
+<input onclick="func()" id="inviare" style="display:none;" type="submit" value="envoyer"/>
+</form>
+</div>
+<div style="border: 1px solid white; height: 8%; width: 32%; display: block; margin: 1% 0 0 19%; padding: 1.5% 0 0 0; background: url('images/STOCKRECUP_DESKTOP_BG_STOCKAGE_FRAMES.png') top left no-repeat; background-size: 100%;">
+<p id="waits" style="color: white; display: block; height: 100%; margin: 3% 0 0 0; text-align:center; padding: 0; ">Attente d&eacute;marrage transfert</p>
+<p id="tx" style="display: none; color: white; height: 100%; margin: 3% 0 0 0; text-align:center; padding: 0; ">Transfert en cours</p>
+</div>
+<script>
+document.getElementById('archivatio').onchange = function () {
+        fn1.innerHTML = this.value.substring(this.value.lastIndexOf('\\') + 1);
+};
+function func() {
+        document.getElementById("waits").style.display = "none";
+        document.getElementById("tx").style.display = "block";
+}
+</script>
+<div style="position: absolute; bottom: 4px; width: 100%; height: 1%;">
+<a style="margin: 0; padding: 0; width: 33%; color: black; text-decoration: none; display: inline-block; text-align: right; font-size: 100%; " href="https://www.effervecrea.net/cas-ou-scenarios-d-utilisations-possibles-et-intro-(stockrecup.net)">Blog</a>
+<a style="margin: 0; padding: 0; width: 33%; color: black; text-decoration: none; display: inline-block; text-align: center; font-size: 100%;" href="/mentions-legales">Mentions l&eacute;gales</a>
+<a style="margin: 0; padding: 0; width: 33%; color: black; text-decoration: none; display: inline-block; text-align: left; font-size: 100%;" href="mailto:effervecreanet@gmail.com">Contact</a>
+</div>
+<div id="RGPD" style="display:none;width:100%; height: auto; position: fixed; left:0;bottom: 0px;background: white; border: 1px solid green;padding: 0; margin:0; ">
+<p style="text-align:center;font-family: Arial; font-size: 20px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a style="font-size: 21px;" href="/RGPD_Refus">Refuser</a> ou <a style="font-size: 21px;" href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+<script>
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</body>
+</html>

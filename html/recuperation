@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="description" content="Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils (mobiles et ordis)." />
+        <title>StockR&eacute;cup - R&eacute;cup&eacute;ration</title>
+<style>
+p { font-size: 120%; font-family: Arial; font-style: normal; }
+label { font-size: 120%; font-family: Arial; font-style: normal; }
+h1 { margin: 0; padding: 0; display: inline; font-size: 10px;}
+h2 { margin: 0; padding: 0; display: inline; font-size: 10px;}
+h3 { margin: 0; padding: 0; display: inline; font-size: 10px;}
+</style>
+</head>
+<body style="display: block; width: 100%; position: fixed; height: 98%; background: url('/images/STOCKRECUP_DESKTOP_BG_RECUPERATION.png') no-repeat; background-size: 100%; background-color: #99cc66;">
+<div style="height: 8.8%; width: 60%; margin: 2% auto; padding: 0 auto; display: block;">
+<h1><a style="margin: 0; padding: 0 0 0 0; color: black; display:inline;" href="/"><img title="Retour page Accueil" alt="Retour page Accueil" style="margin: 0; padding: 0; display: inline; width: 23%; height: 24%;" src="images/STOCKRECUP_MENU_ACCUEIL.png" /></a></h1>
+<h2><a style="margin: 0; padding: 0 0 0 0; color: black; display: inline;" href="/stockage"><img title="Acc&egrave;s stocker" alt="Acc&egrave;s stocker" style="margin: 0; padding: 0; width: 23%; height: 23%;" src="images/STOCKRECUP_MENU_STOCKAGE.png"/></a></h2>
+<h2><a style="margin: 0; padding: 0 0 0 0; color: black; display: inline;" href="/recuperation"><img title="Acc&egrave;s r&eacute;cup&eacute;ration" alt="Acc&egrave;s r&eacute;cup&eacute;ration"style="margin: 0; padding: 0; width: 23%; height: 23%;" src="images/STOCKRECUP_MENU_RECUPERATION.png"/></a></h2>
+<h3><a style="margin: 0; padding: 0 0 0 0; color: black; display: inilne;" href="/aide"><img title="Acc&egrave;s aide" alt="Acc&egrave;s aide" style="margin: 0; padding: 0; width: 23%; height: 23%;" src="images/STOCKRECUP_MENU_AIDE.png" /></a></h3>
+</div>
+<div style="border: 1px solid white; height: 44%; width: 32%; display: block; margin: 0 0 0 19%; padding: 0 0 0 0; background: url('images/STOCKRECUP_DESKTOP_BG_STOCKAGE_FRAMES.png') top left no-repeat; background-size: 100% 100%;">
+<p id="waits" style="color: white; display: block; margin: 2% 0; text-align:center; padding: 5% 0 0 0; width: 100%; ">Vous pouvez entrer dans le rectangle blanc le code de r&eacute;cup&eacute;ration:</p>
+<form style="display: block; margin: 0 0 0 0; padding: 0;width: 100%; height: 60px;" action="/recuperation" method="post">
+<input id="archivatio2" style="display: block; height: 27px; margin: 5% 0 5% 30%;width: 40%;padding: 0;" type="password" name="pin" />
+<label for="archivatio3" style="border-color: red;width: 96%;color: white;display:block; margin: 26px auto 16px auto;  text-align:center;border-style: double; background: darkgrey;">R&eacute;cup&eacute;rer</label>
+<input onclick="func2()" id="delete" style="display: inline;float;left; height: 19px; margin: 7px 0 0 30%;width: 27px;padding: 0;color:white" type="checkbox" name="supprimer" value="0"/>
+<input onclick="func()" id="archivatio3" style="display: none;" type="submit" value="R&eacute;cup&eacute;rer"/>
+<p style="color: white; display: inline; padding: 0; margin: 0;">supprimer</p>
+</form>
+</div>
+<script>
+function func2() {
+        var x = document.getElementById("delete").value;
+        if (parseInt(x) == 0) {
+                document.getElementById("delete").value = "1";
+        } else {
+                document.getElementById("delete").value = "0";
+        }
+}
+</script>
+<div style="position: absolute; bottom: 4px; width: 100%; height: 1%;">
+<a style="margin: 0; padding: 0; width: 33%; color: black; text-decoration: none; display: inline-block; text-align: right; font-size: 100%; " href="https://www.effervecrea.net/cas-ou-scenarios-d-utilisations-possibles-et-intro-(stockrecup.net)">Blog</a>
+<a style="margin: 0; padding: 0; width: 33%; color: black; text-decoration: none; display: inline-block; text-align: center; font-size: 100%;" href="/mentions-legales">Mentions l&eacute;gales</a>
+<a style="margin: 0; padding: 0; width: 33%; color: black; text-decoration: none; display: inline-block; text-align: left; font-size: 100%;" href="mailto:effervecreanet@gmail.com">Contact</a>
+</div>
+<div id="RGPD" style="display:none;width:100%; height: auto; position: fixed; left:0;bottom: 0px;background: white; border: 1px solid green;padding: 0; margin:0; ">
+<p style="font-family: Arial; text-align:center;font-size: 20px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a style="font-size: 21px;" href="/RGPD_Refus">Refuser</a> ou <a style="font-size: 21px;" href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+<script>
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</body>
+</html>

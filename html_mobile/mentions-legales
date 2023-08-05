@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="description" content="Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils (mobiles et ordis)." />
+        <title>StockR&eacute;cup - Mentions l&eacute;gales</title>
+<style>
+p {margin: 7px 0 0 0; padding: 0;}
+</style>
+</head>
+<body style="background: url('images/STOCKRECUP_MOBILE_BG.jpg') no-repeat top center fixed; background-size: 100% 100%; padding: 0; width: 100%; margin: 0;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 192px;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<h1 style="text-align: center;"><a style="margin:0;padding:0;color:black;  letter-spacing: 1px; text-decoration: none;  font-weight: lighter; font-size:24px;" href="/"><span style="border-top: 2px solid red;">S</span>tock<span style="border-bottom: 2px solid red;">R</span>&eacute;cup</a></h1>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<a style="text-align:center; width: 50%; float:left;  font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/stockage"><span style="border-top: 1px solid red;">Stockage</span></a>
+<a style="text-align:center; width: 50%; float:right; font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/recuperation"><span style="border-bottom: 1px solid red;">R&eacute;cup&eacute;ration</span></a>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+</div>
+<h2 style="color: white;text-align:center;display: block; margin: 0; width: 100%; height: 100px;">Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils</h2>
+<div style="display: block;  margin: 0; padding: 0; width: 100%;">
+<h3 style="color: white;text-align:center;display: block;width: 100%; margin: 14px auto; height: 60px;">Mentions l&eacute;gales</h3>
+
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px;text-decoration:underline;">Mentions l&eacute;gales propre &agrave; l'utilisation de ce site en tant qu'application:</p>
+
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px">Chaque fichier envoy&eacute; et stock&eacute; est conserv&eacute; jusqu'&agrave; ce que le quota d'espace atteigne sa limite. Quand cette limite est d&eacute;pass&eacute;e, les fichiers stock&eacute;s et leurs codes de r&eacute;cup&eacute;ration li&eacute;s font l'objet d'une suppression et deviennent donc non-r&eacute;cup&eacute;rables. Cette limite est g&eacute;n&eacute;ralement atteinte 1 fois par an, c'est &agrave; dire qu'une suppression de tous les fichiers stock&eacute;s arrive au maximum 1 fois par an. Et elle est ou sera effectu&eacute;e &agrave; chaque fin d'ann&eacute;e c'est &agrave; dire le 31 d&eacute;cembre de l'ann&eacute;e en cours.</p>
+
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px; text-decoration:underline;">Mentions l&eacute;gales propre &agrave; la consultation de ce site:</p>
+
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px">Ce site est &eacute;dit&eacute; par Franck Lesage habitant au 21 rue Sainte Marie 50400 Granville. Les r&eacute;gles et lois en vigueur en France s'appliquent au contenu de ce site. Si vous voulez vous opposer au contenu ou une partie du contenu de ce site vous pouvez le faire. Si votre contestation est recevable le contenu sera retir&eacute; ou modifi&eacute;. </p>
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px">Si le contenu ou une partie du contenu de ce site est distribu&eacute; de mani&egrave;re modifi&eacute; et que cela va contre l'&eacute;diteur initial, Franck Lesage ou moi, alors je ne suis pas assignable au contenu ainsi diffus&eacute;.</p>
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px">Si certain propos sont illisibles ou incompr&eacute;hensibles il va pour l'&eacute;diteur de vous rediriger vers des sites autres.</p>
+<p style="color: white; display: block; width: 100%; text-align:center; font-size: 20px">Les mentions l&eacute;gales de l'h&eacute;bergeur de ce logiciel sont ici: <a href="https://portal.azure.com">https://portal.azure.com</a>.</p>
+<a style="text-align:center;width: 100%; display:block; height: 100px; color:white; font-weight: bold;font-size: 24px;" href="https://www.effervecrea.net/pdf/plaquette_presentation_commerciale_stockrecup.pdf">Plaquette de pr&eacute;sentation commerciale stockrecup (format PDF pour impression papier)</a>
+<p>&nbsp;</p>
+<a style="text-align:center;width: 100%; display:block; height: 100px; color:white; font-weight: bold;font-size: 24px;" href="https://www.effervecrea.net/pdf/stockrecup_brand_marketing_screen.pdf">Plaquette de pr&eacute;sentation commerciale stockrecup (format PDF pour affichage &eacute;cran)</a>
+<p>&nbsp;</p>
+<img style="margin: 0 auto; padding: 0 auto; width: 100%; height: 144px;" src="https://www.effervecrea.net/images/logo4_effervecreanet.png" />
+<p>&nbsp;</p>
+
+</div>
+
+<div id="RGPD" style="display:none;width:100%; height: auto; position: fixed; bottom: 0px;background: white; border-top: 1px solid darkgreen;padding: 0; ">
+<p style="text-align:center;font-size: 13px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a href="/RGPD_Refus">Refuser</a> ou <a href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+
+<script>
+
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</div>
+
+</body>
+</html>

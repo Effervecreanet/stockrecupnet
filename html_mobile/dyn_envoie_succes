@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="description" content="Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils (mobiles et ordis)." />
+        <title>StockRecup - Fichier stock&eacute;</title>
+</head>
+<body style="background: url('images/STOCKRECUP_MOBILE_BG.jpg') no-repeat top center fixed; background-size: 100%% 100%%; padding: 0; width: 100%%; margin: 0 0;">
+<div style="display: block; margin: 0; padding: 0; width: 100%%; height: 192px;">
+<div style="display: block; margin: 0; padding: 0; width: 100%%; height: 64px;">
+<h1 style="text-align: center;"><a style="margin:0 auto;padding:0;color:black;  letter-spacing: 1px; text-decoration: none;  font-weight: lighter; font-size:24px;" href="/"><span style="border-top: 2px solid red;">S</span>tock<span style="border-bottom: 2px solid red;">R</span>&eacute;cup</a></h1>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%%; height: 32px;">
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%%; height: 64px;">
+<a style="text-align:center; width: 50%%; float:left;  font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/stockage"><span style="border-top: 1px solid red;">Stockage</span></a>
+<a style="text-align:center; width: 50%%; float:right; font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/recuperation"><span style="border-bottom: 1px solid red;">R&eacute;cup&eacute;ration</span></a>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%%; height: 32px;">
+</div>
+</div>
+<h2 style="color: white;text-align:center;display: block; margin: 0; width: 100%%; height: 100px;">Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils</h2>
+<div style="display: block; margin: 0; width: 100%%;">
+
+
+<div style="display: block; background: url('images/STOCKRECUP_MOBILE_BG_FRAMES.jpg');background-size: 100%% 100%%;padding: 0; border: 1px solid rgb(0,64,142); font-size: 20px; margin: 10px auto; width: 96%%; height: 200px">
+<p style="display: block; color:white; margin: 0; padding:0; text-align:center;  height: 48px">Le nom du fichier stock&eacute; est le suivant:</p>
+<p style="display: block; color:red; margin: 0; text-align:center;width: 100%%; font-size: 17px; height: 50px; ">%s</p>
+<p style="display: block; color:white; margin: 7px 0 0 0; padding: 0; text-align:center;  height: 60px">Son code de r&eacute;cup&eacute;ration est le suivant:</p>
+<p style="display: block;color:red; margin: 0; font-size: 26px;text-align:center;width: 100%%; height: 30px; ">%s</p>
+</div>
+<div style="display: block; background: url('images/STOCKRECUP_MOBILE_BG_FRAMES.jpg');background-size: 100%% 100%%;padding: 0; border: 1px solid rgb(0,64,142); font-size: 20px; margin: 10px auto; width: 96%%; height: 110px">
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%%;padding: 27px 2px;">Capture d'&eacute;cran: Volume bas et Allumer pour android.</p>
+</div>
+<div id="RGPD" style="display:none;width:100%%; height: auto; position: fixed; bottom: 0px;background: white; border-top: 1px solid darkgreen;padding: 0; ">
+<p style="text-align:center;font-size: 13px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a href="/RGPD_Refus">Refuser</a> ou <a href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+
+<script>
+
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</div>
+</body>
+</html>

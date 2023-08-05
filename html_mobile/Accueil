@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="description" content="Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils (mobiles et ordis)." />
+        <title>StockR&eacute;cup - Accueil</title>
+</head>
+<body style="background: url('images/STOCKRECUP_MOBILE_BG.jpg') no-repeat top center fixed; background-size: 100% 100%; padding: 0; width: 100%; margin: 0 0;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 192px;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<h1 style="text-align: center;"><a style="margin:0 auto;padding:0;color:black;  letter-spacing: 1px; text-decoration: none;  font-weight: lighter; font-size:24px;" href="/"><span style="border-top: 2px solid red;">S</span>tock<span style="border-bottom: 2px solid red;">R</span>&eacute;cup</a></h1>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<a style="text-align:center; width: 50%; float:left;  font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/stockage"><span style="border-top: 1px solid red;">Stockage</span></a>
+<a style="text-align:center; width: 50%; float:right; font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/recuperation"><span style="border-bottom: 1px solid red;">R&eacute;cup&eacute;ration</span></a>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+</div>
+<h2 style="color: white;text-align:center;display: block; margin: 0; width: 100%; height: 100px;">Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils</h2>
+<div style="display: block; margin: 0 auto; padding: 0;width: 100%;">
+
+<p style="color: white; font-size: 20px; text-align:center; ">Admettons que vous ayez un fichier sur mobile et que vous le voulez sur ordinateur.</p>
+<p style="color: white; font-size: 20px; text-align:center; ">Le probl&egrave;me certes r&eacute;soluble avec une connexion USB n'est toujours pas valide quand ordi et mobile pr&eacute;sente une incompatibilit&eacute;.</p>
+<p style="color: white; font-size: 20px; text-align:center; ">Sans compter le temps de prendre le fil USB, connecter les deux appareils et faire le transfert.</p>
+<p style="color: white; text-align:center; font-size: 20px;">Si ce qui vient d'&ecirc;tre dit vous parle, peut-&ecirc;tre que ce service est votre solution de transfert mobile/ordi et ordi/mobile.</p>
+<p style="color: white; font-size: 20px; text-align:center; ">Avec r&eacute;cup&eacute;ration par code 6 chiffres et suppression apr&egrave;s r&eacute;cup&eacute;ration.</p>
+
+<a href="/stockage"><img alt="stockage depuis un mobile" src="images/STOCKRECUP_MOBILE_ILLUSTRATION1.jpg" style="display: block; margin: 0 auto; width: 90%; border: 1px solid purple; height: 500px;" /></a>
+
+<p style="padding:0;display:block; height: 50px;width:100%; color: white; text-align:center; font-size: 20px; ">Exemple fichier stock&eacute; &agrave; partir d'un mobile</p>
+<a href="/stockage"><img alt=">Exemple fichier stock&eacute; &agrave; partir d'un mobile" src="images/STOCKRECUP_MOBILE_ILLUSTRATION2.jpg" style="display: block; border: 1px solid white; width: 100%;height: 30%;" /></a>
+<p style="height:24px;  width:100%; color: white; text-align:center;font-size:20px; ">Exemple r&eacute;cup sur un ordi</p>
+<a href="/recuperation"><img alt="Exemple r&eacute;cup sur un ordi" src="images/STOCKRECUP_MOBILE_ILLUSTRATION3.png" style="display: block; padding: 0px 0;border: 1px solid white; width: 100%;height: 31%;" /></a>
+
+<p style="color: orange; font-size: 22px; width:100%;display:block;text-align: center;width: 100%;margin: 10px 0 0 0; padding: 10px 0 0 0; text-decoration:underline; "><a style="color:rgb(0,64,128); font-family: Impact;" href="/aide">Aide</a></p>
+
+<p style="display:block; width: 100%; color: purple; text-align:center;font-size:20px; height: 24px;padding: 6px 0;"><a href="https://www.effervecrea.net/cas-ou-scenarios-d-utilisations-possibles-et-intro-(stockrecup.net)" style="color:purple;text-decoration: none">Blog</a>&nbsp;<span style="color:white">-</span>&nbsp;<a href="/mentions-legales" style="color:purple;text-decoration: none">Mentions l&eacute;gales</a>&nbsp;<span style="color:white">-</span>&nbsp;<a href="mailto:effervecreanet@gmail.com" style="color:purple;text-decoration:none">Contact</a></p>
+
+<div id="RGPD" style="display:none;width:100%; height: auto; position: fixed; bottom: 0px;background: white; border-top: 1px solid darkgreen;padding: 0; ">
+<p style="text-align:center;font-size: 13px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a href="/RGPD_Refus">Refuser</a> ou <a href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+
+<script>
+
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</div>
+
+</body>
+</html>

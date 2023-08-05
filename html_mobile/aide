@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="description" content="Aides pour stocker ou r&eacute;cup&eacute;rer un fichier avec StockR&eacute;cup" />
+        <title>StockR&eacute;cup - Aide</title>
+</head>
+<body style="background: url('images/STOCKRECUP_MOBILE_BG.jpg') no-repeat top center fixed; background-size: 100% 100%; padding: 0; width: 100%; margin: 0 0;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 192px;">
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<h1 style="text-align: center;"><a style="margin:0 auto;padding:0;color:black;  letter-spacing: 1px; text-decoration: none;  font-weight: lighter; font-size:24px;" href="/"><span style="border-top: 2px solid red;">S</span>tock<span style="border-bottom: 2px solid red;">R</span>&eacute;cup</a></h1>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 64px;">
+<a style="text-align:center; width: 50%; float:left;  font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/stockage"><span style="border-top: 1px solid red;">Stockage</span></a>
+<a style="text-align:center; width: 50%; float:right; font-size: 23px; color:rgb(0,64,128);text-decoration:none;" href="/recuperation"><span style="border-bottom: 1px solid red;">R&eacute;cup&eacute;ration</span></a>
+</div>
+<div style="display: block; margin: 0; padding: 0; width: 100%; height: 32px;">
+</div>
+</div>
+<h2 style="color: white;text-align:center;display: block; margin: 0; width: 100%; height: 100px;">Service de stockage et de r&eacute;cup&eacute;ration de fichier et multi-appareils</h2>
+
+<div style="display: block; margin: 0; width: 100%;">
+
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 1)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">C'est &agrave; vous de bien retenir le code compos&eacute; de 6 chiffres une fois qu'il vous ai indiqu&eacute; que le fichier peut &ecirc;tre r&eacute;cup&eacute;rer.</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 2)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Si votre mobile n'indique pas <b>4G</b> ou qu'il indique <b>E</b> ou <b>H</b> ou qu'il est sur un r&eacute;seau ordinaire, vous ne pourrez transf&eacute;rer que des fichiers relativement petit et le transfert prendra plus de temps <b>(4 minutes pour une photo)</b>.</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 3)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Si votre mobile est connect&eacute; en wifi &agrave; un point d'acc&egrave;s ou une box synchronis&eacute; &agrave; internet avec une connexion fibre vous obtiendrez les meilleurs r&eacute;sultats en terme de vitesse.</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 4)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Si vous ne pouvez pas noter le code de r&eacute;cup&eacute;ration, l'outil de <b>Capture d'&eacute;cran</b> peut s'av&eacute;rer utile. C'est une combinaison de boutons physiques: Volume bas et Allumer pour android.</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 5)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Il est conseill&eacute; de fermer la page ou l'onglet apr&egrave;s chaque utilisation et de ne pas divulguer votre code.</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 6)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">La taille maximum d'un fichier pouvant &ecirc;tre stocker est 4 gigaoctets. Au-del&agrave; de 400 m&eacute;ga, il faut &ecirc;tre tr&egrave;s patient.</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 7)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Par exemple pour un fichier portant le nom "r&eacute;cup&eacute;ration.jpg" c'est &agrave; vous de le renommer <b>avant de l'envoyer</b> avec le nom sans accents c'est &agrave; dire "recuperation.jpg".</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Aide 8)</p>
+<p style="display: block; font-size: 20px; text-align: center; color: white; width: 100%;">Pour que le smartphone ne se mette pas en veille et donc qu'il ne coupe pas le transfert, tapoter l'&eacute;cran jusqu'&agrave; la fin du transfert.</p>
+<p style="display:block; width: 100%; color: purple; text-align:center;font-size:20px; height: 24px;padding: 20px 0; margin: 0 0;"><a href="https://www.effervecrea.net/cas-ou-scenarios-d-utilisations-possibles-et-intro-(stockrecup.net)" style="color:purple;text-decoration: none">Blog</a>&nbsp;<span style="color:white">-</span>&nbsp;<a href="/mentions-legales" style="color:purple;text-decoration: none">Mentions l&eacute;gales</a>&nbsp;<span style="color:white">-</span>&nbsp;<a href="mailto:effervecreanet@gmail.com" style="color:purple;text-decoration:none">Contact</a></p>
+</div>
+<div id="RGPD" style="display:none;width:100%; height: auto; position: fixed; bottom: 0px;background: white; border-top: 1px solid darkgreen;padding: 0; ">
+<p style="text-align:center;font-size: 13px;display:block;">Ce bas de page vous laisse choisir entre l'enregistrement et la sauvegarde des entit&eacute;s qui identifient votre connexion et vous-m&ecirc;me. Vous pouvez refuser l'enregistrement et la sauvegarde en cliquant sur <a href="/RGPD_Refus">Refuser</a> ou <a href="/RGPD_Ok">Accepter</a> l'enregistrement et la sauvegarde en cliquant sur accepter. Pour plus d'informations sur le RGPD: consulter le site CNIL.</p></div>
+
+<script>
+
+if(document.cookie.indexOf("RGPD=1")!=-1)
+{
+        document.getElementById("RGPD").style.display = "none";
+}
+else
+{
+        document.getElementById("RGPD").style.display = "block";
+}
+
+</script>
+</div>
+</body>
+</html>
+
