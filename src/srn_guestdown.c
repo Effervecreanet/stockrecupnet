@@ -73,7 +73,7 @@ create_guest_down(struct response *resp, char filename[254])
 	for (phnv = (struct hdr_nv *)&resp->hdrnv; phnv->pname != NULL; phnv++);
 
 	phnv->pname = "Location";
-	sprintf(phnv->value, "https://%s/%s%s", wwwhostname, SRN_PATH_STORE, filename);
+	sprintf(phnv->value, "http://%s/%s%s", wwwhostname, SRN_PATH_STORE, filename);
 	
 	return;
 }

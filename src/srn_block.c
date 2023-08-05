@@ -11,7 +11,7 @@
 #define PATH_BLOCKED    "./blocked/"
 #define MAX_ATTEMPT 	24
 
-extern int fdlog;
+extern int fdlog_srn;
 extern char     gmdate[33];  
 
 
@@ -69,17 +69,9 @@ isblocked(char *usraddr)
 
 	if (cnt == MAX_ATTEMPT) {
 		printf("Attempts over...\n");
-		write(fdlog, "attempts_over:", strlen("attempts_over:"));
+		write(fdlog_srn, "attempts_over:", strlen("attempts_over:"));
 
-                system("env MAILRC=/dev/null " \
-                        "nss-config-dir=/etc/pki/nssdb " \
-                        "ssl-verify=ignore " \
-                        "from=franck.lesage22@orange.fr " \
-                        "smtp=smtps://smtp.sendgrid.net " \
-                        "smtp-auth-user=apikey " \
-                        "smtp-auth=login mailx -n -s STOCKRECUPNET_DAEMON_INFO " \
-                        "effervecreanet@gmail.com < " \
-                        "./SRN_MAIL_CONTENT_BLOCKED.txt");
+                system("echo NEEDS ADMIN > ./SRN_MAIL_CONTENT_BLOCKED.txt");
 
 		return 1;
 	}

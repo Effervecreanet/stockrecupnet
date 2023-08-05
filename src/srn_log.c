@@ -17,7 +17,6 @@
 #include <netinet/in.h>
 
 #include <sys/stat.h>
-
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
@@ -31,7 +30,10 @@
 
 
 extern char	gmdate[33];
-extern int	fdlog;
+extern int	fdlog_http;
+extern int	fdlog_srn;
+char	httplogbuf[2048];
+char	srnlogbuf[2048];
 
 
 /*
@@ -41,7 +43,7 @@ extern int	fdlog;
  */
 
 int
-open_log(const char *ipstr)
+open_http_log(const char *ipstr)
 {
 	char		logpath[sizeof(PATH_LOG) - 1 + INET_ADDRSTRLEN - 1 + sizeof(".log")];
 	char		buffer[1024];
@@ -52,10 +54,10 @@ open_log(const char *ipstr)
 			     "Can't create the log directory with write and execute perms");
 
 	memset(logpath, 0, sizeof(logpath));
-	sprintf(logpath, "%s%s.log", PATH_LOG, ipstr);
+	sprintf(logpath, "%shttp_%s.log", PATH_LOG, ipstr);
 
-	fdlog = open(logpath, O_WRONLY | O_APPEND | O_CREAT);
-	if (fdlog < 0)
+	fdlog_http = open(logpath, O_WRONLY | O_APPEND | O_CREAT);
+	if (fdlog_http < 0)
 		errx(1, "Unable to open or create log file %s (%s) exiting ..",
 		     logpath,
 		     strerror(errno));
@@ -67,8 +69,54 @@ open_log(const char *ipstr)
 		logpath,
 		gmdate);
 
-	write(fdlog, buffer, strlen(buffer));
+	write(fdlog_http, buffer, strlen(buffer));
 
 
 	return 1;
+}
+
+void init_intro_http_log(char *wwwhostname, char *addrstr) {
+	write(fdlog_http, HTTP_STRLOG_STARTING,
+                     strlen(HTTP_STRLOG_STARTING));
+        write(fdlog_http, wwwhostname,
+                     strlen(wwwhostname));
+        write(fdlog_http, "\n", 1);
+
+        write(fdlog_http, HTTP_STRLOG_STARTING_ADDR,
+                     strlen(HTTP_STRLOG_STARTING_ADDR));
+        write(fdlog_http, addrstr, strlen(addrstr));
+        write(fdlog_http, "\n", 1);
+
+	return;
+}
+
+int open_srn_log(void) {
+	char            logpath[sizeof(PATH_LOG) - 1 + INET_ADDRSTRLEN - 1 + sizeof(".log")];
+	char		buffer[1024];
+
+	memset(logpath, 0, sizeof(logpath));
+	sprintf(logpath, "%ssrn.log", PATH_LOG);
+
+
+	fdlog_srn = open(logpath, O_WRONLY | O_APPEND | O_CREAT);
+	if (fdlog_srn < 0)
+		errx(1, "Unable to open or create log file %s (%s) exiting ..",
+		     logpath,
+		     strerror(errno));
+
+	set_gmdate();
+	memset(buffer, 0, 1024);
+	sprintf(buffer, "\n\nSRN log file %s opened at %s\n",
+			logpath,
+			gmdate);
+
+	write(fdlog_srn, buffer, strlen(buffer));
+}
+
+void init_intro_srn_log(void) {
+        write(fdlog_srn, "\n\n", 2);
+	write(fdlog_srn, SRN_STRLOG_STARTING, strlen(SRN_STRLOG_STARTING));
+        write(fdlog_srn, "\n", 2);
+
+	return;
 }

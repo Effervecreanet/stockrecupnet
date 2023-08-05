@@ -71,7 +71,7 @@ create_response_movedperm(struct response *resp)
 	for (phnv = (struct hdr_nv *)&resp->hdrnv; phnv->pname != NULL; phnv++);
 
 	phnv->pname = "Location";
-	sprintf(phnv->value, "https://%s/Accueil", wwwhostname);
+	sprintf(phnv->value, "http://%s/Accueil", wwwhostname);
 
 	return;
 }

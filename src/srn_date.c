@@ -21,7 +21,8 @@
 #include "srn_date.h"
 
 char		gmdate[33];
-char		gmdatelog[33];
+char		log_date_now[33];
+struct		tm *tmv;
 
 /*
  * Empty global variable gmdate and set it to GMT date format for now
@@ -43,17 +44,17 @@ set_gmdate(void)
 }
 
 
-void
-set_gmdatelog(void)
-{
-	struct tm      *tm;
-	time_t		tloc;
+/* Set log_date_now to now in a short wsite log format still human readable */
 
-	time(&tloc);
-	tm = gmtime(&tloc);
+void set_log_date_now(void) {
+  time_t now;
 
-	memset(gmdatelog, 0, sizeof(gmdate));
-	strftime(gmdatelog, 33, "%a.%d.%b.%Y.%H.%M.%S", tm);
+  memset(&now, 0, sizeof(time_t));
+  time(&now);
+  tmv = gmtime(&now);
 
-	return;
+  memset(log_date_now, 0, LOG_DATE_NOW_SIZE);
+  strftime(log_date_now, LOG_DATE_NOW_SIZE, "%d/%b/%Y:%T -0600", tmv);
+
+  return;
 }

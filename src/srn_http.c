@@ -40,7 +40,7 @@ extern struct static_entry static_entries[];
 extern struct static_entry dyn_entries[];
 extern int    fdlog;
 extern pid_t 	pid;
-extern char strlog[2048];
+extern char srnlogbuf[2048];
 
 
 int srn_isgraph(unsigned char c);
@@ -397,10 +397,10 @@ rec_filename(char buffer[4096], char *filename)
 
 	*pdquote = '\0';
 	if (strlen(pfilename) > 252) {
-		strcat(strlog, "filename_too_long");
+		strcat(srnlogbuf, "filename_too_long");
 		return -1;
 	} else if (*pfilename == '\0') {
-		strcat(strlog, "no_filename_supplied");
+		strcat(srnlogbuf, "no_filename_supplied");
 		return -1;
 	}
 	/*
@@ -409,13 +409,13 @@ rec_filename(char buffer[4096], char *filename)
 	if (strstr(pfilename, "..") != NULL ||
 	    strchr(pfilename, '/') != NULL ||
 	    strchr(pfilename, '%') != NULL) {
-		strcat(strlog, "invalid_characters_in_filename_(\"..\"_or_'/')");
+		strcat(srnlogbuf, "invalid_characters_in_filename_(\"..\"_or_'/')");
 		return -1;
 	}
 	for (pchar = pfilename; *pchar && (srn_isgraph((unsigned char)*pchar)); pchar++);
 
 	if (*pchar) {
-		strcat(strlog, "invalid_characters_in_filename");
+		strcat(srnlogbuf, "invalid_characters_in_filename");
 		return -1;
 	}
 	strcpy(filename, pfilename);

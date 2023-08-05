@@ -49,18 +49,27 @@
 
 
 extern char	gmdate[33];
-extern char	gmdatelog[33];
+extern char     log_date_now[33];
+extern char httplogbuf[2048];
+extern char srnlogbuf[2048];
 char  nakedhostname[NI_MAXHOST];
 char  wwwhostname[NI_MAXHOST];
 int fdshm_gdown, fdshm_gdownok, fdshm_suspend;
-int 	fdlog;
-char   strlog[2048];
+int 	fdlog_http;
+int 	fdlog_srn;
 jmp_buf  env;
 
 struct hostserv {
 	char		hostname[NI_MAXHOST];
 	char		servname[NI_MAXSERV];
 	uint8_t		canonname;
+};
+
+struct res_tolog {
+        char *method;
+        long sent;
+        long received;
+        short s_code;
 };
 
 /*
@@ -94,6 +103,7 @@ main(int argc, char **argv)
 	char guest_down[254 + SRN_PATH_STORE_SIZE];
 	bool daemonize = false;
 	char ch, srnsuspend[2];
+	struct res_tolog *result = NULL;
 
 	/* Without arguments run the daemon otherwise print usage */
 	if (argc < 4) {
@@ -171,18 +181,10 @@ main(int argc, char **argv)
 	if (create_socket(&sserv) < 0)
 		exit(1);
 
-	open_log(addrstr);
-
-	write(fdlog, STRLOG_STARTING,
-	             strlen(STRLOG_STARTING));
-	write(fdlog, wwwhostname,
-		     strlen(wwwhostname));
-	write(fdlog, "\n", 1);
-
-	write(fdlog, STRLOG_STARTING_ADDR,
-	             strlen(STRLOG_STARTING_ADDR));
-	write(fdlog, addrstr, strlen(addrstr));
-	write(fdlog, "\n", 1);
+	open_http_log(addrstr);
+	open_srn_log();
+	init_intro_http_log(wwwhostname, addrstr);
+	init_intro_srn_log();
 
 	createdb();
 
@@ -224,22 +226,33 @@ main(int argc, char **argv)
 
 	for (;;) {
 		if (pid == 0 || pid0 == 0) {
-			if (strlog[0]) {
-				while(lockf(fdlog, F_LOCK, 0) < 0)
+			if (httplogbuf[0]) {
+				while(lockf(fdlog_http, F_LOCK, 0) < 0)
 					;
-				write(fdlog, strlog, strlen(strlog));
-				write(fdlog, "\n", 1);
-				lockf(fdlog, F_ULOCK, 0);
+				write(fdlog_http, httplogbuf, strlen(httplogbuf));
+				write(fdlog_http, "\n", 1);
+				lockf(fdlog_http, F_ULOCK, 0);
+			} else if (srnlogbuf[0]) {
+				while(lockf(fdlog_srn, F_LOCK, 0) < 0);
+				write(fdlog_srn, srnlogbuf, strlen(srnlogbuf));
+				write(fdlog_srn, "\n", 1);
+				lockf(fdlog_srn, F_ULOCK, 0);
 			}
 			exit(0);
 		}
 
-		if (strlog[0]) {
-			while(lockf(fdlog, F_LOCK, 0) < 0)
+		if (httplogbuf[0]) {
+			while(lockf(fdlog_http, F_LOCK, 0) < 0)
 				;
-			write(fdlog, strlog, strlen(strlog));
-			write(fdlog, "\n", 1);
-			lockf(fdlog, F_ULOCK, 0);
+			write(fdlog_http, httplogbuf, strlen(httplogbuf));
+			write(fdlog_http, "\n", 1);
+			lockf(fdlog_http, F_ULOCK, 0);
+		} else  if (srnlogbuf[0]) {
+			while(lockf(fdlog_srn, F_LOCK, 0) < 0)
+				;
+			write(fdlog_srn, srnlogbuf, strlen(srnlogbuf));
+			write(fdlog_srn, "\n", 1);
+			lockf(fdlog_srn, F_ULOCK, 0);
 		}
 
 		pread(fdshm_suspend, srnsuspend, 2, 0);
@@ -268,12 +281,12 @@ main(int argc, char **argv)
 		
 
 		set_gmdate();
-		set_gmdatelog();
+		set_log_date_now();
 
 		/* printf("Oncoming connection from %s:%s\n", hs.hostname,
  * hs.servname); */
 
-		memset(strlog, 0, 2048);
+		memset(httplogbuf, 0, 2048);
 		/*
 		sprintf(strlog, "%s:oncoming:%s:%s:", gmdatelog,
 					              hs.hostname,
@@ -288,7 +301,10 @@ main(int argc, char **argv)
 		case 2:
 			pwrite(fdshm_suspend, "\x01", 2, 0);
 		case 1:
-			strcat(strlog, "exception_error");
+			set_log_date_now();
+			sprintf(httplogbuf, "%s - - [%s] \"\" 400 0\n",
+					inet_ntoa(usersin.sin_addr),
+					log_date_now);
 			shutdown(suser, SHUT_RDWR);
 			close(suser);
 			continue;
@@ -303,7 +319,7 @@ main(int argc, char **argv)
 			pid = fork();
 			if (pid != 0) {
 				close(suser);
-				memset(strlog, 0, 2048);
+				memset(httplogbuf, 0, 2048);
 				continue;
 			}
 			shutdown(suser, SHUT_RD);
@@ -312,33 +328,45 @@ main(int argc, char **argv)
 		phdr_host = hdr_nv_value(hdrnv, "Host");
 
 		if (phdr_host == NULL || *phdr_host == '\0') {
-			strcat(strlog, "null_host");
+			set_log_date_now();
+			sprintf(httplogbuf, "%s - - [%s] \"\" 400 0\n",
+					inet_ntoa(usersin.sin_addr),
+					log_date_now);
 			goto closeconn; 
 		}
 
 		if (strncasecmp(phdr_host, nakedhostname,
-        strlen(nakedhostname)) == 0) {
+				strlen(nakedhostname)) == 0) {
 			send_moved_perm(suser);
-			strcat(strlog, "root_redirection");
+			set_log_date_now();
+			sprintf(httplogbuf, "%s - - [%s] \"\" 301 0\n",
+					inet_ntoa(usersin.sin_addr),
+					log_date_now);
 			goto closeconn; 
 		} else if (strncasecmp(phdr_host, wwwhostname,
 						  strlen(wwwhostname)) != 0) {
-			strcat(strlog, "bad_host:blocked_request");
+			set_log_date_now();
+			sprintf(httplogbuf, "%s - - [%s] \"\" 400 0\n",
+					inet_ntoa(usersin.sin_addr),
+					log_date_now);
 			goto closeconn; 
 		}
 
-		if (srn_handle(suser, &rline, hdrnv, "srn") == 2) {
-			strcat(strlog, "cont");
-			/* continue; */
-		}
+		result = srn_handle(suser, &rline, hdrnv, "srn"); 
 
 closeconn:
 		shutdown(suser, SHUT_RDWR);
 		close(suser);
 		srand48(usersin.sin_port & 0xA7C7);
 
-		strcat(strlog, rline.entry.resource);
-		strcat(strlog, ":sent");
+		set_log_date_now();
+		sprintf(httplogbuf, "%s - - [%s] \"GET %s HTTP/1.1\" %d 0\n",
+				inet_ntoa(usersin.sin_addr),
+			        log_date_now,
+			        rline.entry.resource,
+				result->s_code);
+		if (result)
+			free(result);
 	}
 
 }

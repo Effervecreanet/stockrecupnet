@@ -41,17 +41,24 @@
 
 extern int fdshm_gdown, fdshm_gdownok;
 extern jmp_buf env;
-extern int    fdlog;
+extern int    fdlog_http;
+extern int    fdlog_srn;
 extern char	gmdate[33];
 extern pid_t pid;
-extern char strlog[2048];
 extern char nakedhostname[NI_MAXHOST];
 extern char wwwhostname[NI_MAXHOST];
+extern char srnlogbuf[2048];
 
 /*
  * This code should be commented.
  */
 
+struct res_tolog {
+	char *method;
+	long sent;
+	long received;
+	short s_code;
+};
 struct pthrdarg {
 	int		suser;
 	struct hdr_nv	hdrnv[MAX_HEADERS];
@@ -72,7 +79,7 @@ srn_receive_file(void *arg)
 	char   		*strlogthrd = strlogthrdbuff;
 
 	memset(strlogthrd, 0, 2048);
-	strncpy(strlogthrd, strlog, 2048); 
+	strncpy(strlogthrd, srnlogbuf, 2048); 
 
 	suser = ((struct pthrdarg *)arg)->suser;
 	memcpy(hdrnv, &((struct pthrdarg *)arg)->hdrnv, sizeof(struct hdr_nv) * MAX_HEADERS);
@@ -186,12 +193,12 @@ srn_receive_file(void *arg)
 		strcat(strlogthrd, (const char*)&pin[0]);
 	}
 err:
-	while(lockf(fdlog, F_LOCK, 0) < 0)
+	while(lockf(fdlog_srn, F_LOCK, 0) < 0)
 		;
-	write(fdlog, strlogthrd, strlen(strlogthrd));
-	write(fdlog, "\n", 1);
+	write(fdlog_srn, strlogthrd, strlen(strlogthrd));
+	write(fdlog_srn, "\n", 1);
 
-	lockf(fdlog, F_ULOCK, 0);
+	lockf(fdlog_srn, F_ULOCK, 0);
 	
 	shutdown(suser, SHUT_WR);
 	while(close(suser) < 0);
@@ -222,7 +229,7 @@ send_file(void *argsf)
 	char   		*strlogthrd = strlogthrdbuff;
 
 	memset(strlogthrd, 0, 2048);
-	strncpy(strlogthrd, strlog, 2048); 
+	strncpy(strlogthrd, srnlogbuf, 2048); 
 
 
 	fd = ((struct pthrdsfarg *)argsf)->fd;
@@ -252,12 +259,12 @@ send_file(void *argsf)
 	else
 	     strcat(strlogthrd, ":conn_abort\n");
 
-        while(lockf(fdlog, F_LOCK, 0) < 0)
+        while(lockf(fdlog_srn, F_LOCK, 0) < 0)
 		;
 
-	write(fdlog, strlogthrd, strlen(strlogthrd));
+	write(fdlog_srn, strlogthrd, strlen(strlogthrd));
 
-	lockf(fdlog, F_ULOCK, 0);
+	lockf(fdlog_srn, F_ULOCK, 0);
 
 	shutdown(suser, SHUT_WR);
 
@@ -266,7 +273,7 @@ send_file(void *argsf)
 	return NULL;
 }
 
-int
+struct res_tolog*
 srn_handle(int suser, struct request_line *rline,
 	   struct hdr_nv hdrnv[MAX_HEADERS],
 	   char *usraddr)
@@ -274,15 +281,25 @@ srn_handle(int suser, struct request_line *rline,
 	int8_t		delete = 0;
 	char		buffdel[sizeof("&supprimer=0")];
 
+
+	memset(srnlogbuf, 0, 2048);
+
 	if (rline->method == HTTP_POST && strcmp(rline->entry.resource, SRN_HTTP_ENDPOINT_STORE) == 0) {
 		struct pthrdarg	arg;
+		struct		res_tolog *restolog = NULL;
+
+		restolog = malloc(sizeof(struct res_tolog));
+		memset(restolog, 0, sizeof(struct res_tolog));
 
 		memset(&arg, 0, sizeof(struct pthrdarg));
 		arg.suser = suser;
 		memcpy(&arg.hdrnv, hdrnv, sizeof(struct hdr_nv) * MAX_HEADERS);
 
 		srn_receive_file(&arg);
-		return 2;
+		restolog->method = "POST";
+		restolog->s_code = 200;
+
+		return restolog;
 	} else if (rline->method == HTTP_POST && strcmp(rline->entry.resource, SRN_HTTP_ENDPOINT_RETRIEVE) == 0) {
 		char	       *clength = NULL;
 		unsigned char	pin[PIN_SIZE + 1];
@@ -322,7 +339,7 @@ srn_handle(int suser, struct request_line *rline,
 				longjmp(env, 1);
 		}
 
-		strcat(strlog, "retrieve_store:");
+		strcat(srnlogbuf, "retrieve_store:");
 		if (isblocked(usraddr))
 			longjmp(env, 2);
 
@@ -340,8 +357,8 @@ clen_ne_pinsize:
 			if (pua == NULL || *pua == '\0')
 				longjmp(env, 1);
 
-			strcat(strlog, "wrong_pin:");
-			strcat(strlog, (const char*)&pin[0]);
+			strcat(srnlogbuf, "wrong_pin:");
+			strcat(srnlogbuf, (const char*)&pin[0]);
 
 			addblocked(usraddr, pua);
 			longjmp(env, 1);
@@ -361,14 +378,16 @@ clen_ne_pinsize:
 
 			memset(guest_downok, 0,  254 + SRN_PATH_STORE_SIZE);
 
-			gdown += sizeof("https://");
+			gdown += sizeof("http://");
 			gdown += strlen(wwwhostname);
 			strncpy(guest_downok, gdown, 254 + SRN_PATH_STORE_SIZE);
 
 			pwrite(fdshm_gdownok, guest_downok, strlen(guest_downok), 0);
 
-			strcat(strlog, "true_pin:");
-			strcat(strlog, (const char*)&pin[0]);
+			strcat(srnlogbuf, "true_pin:");
+			strcat(srnlogbuf, (const char*)&pin[0]);
+
+			return NULL;
 		}
 	} else if ((rline->method == HTTP_GET || rline->method == HTTP_POST) &&
 		   strcmp(rline->entry.resource, SRN_PATH_STORE) == 0) {
@@ -521,7 +540,7 @@ match:
 		guest_down[0] = 'A';
 		pwrite(fdshm_gdownok, guest_down, 254 + SRN_PATH_STORE_SIZE, 0);
 
-		return 2;
+		return NULL;
 	} else if (rline->method == HTTP_GET &&
 		   strcmp(rline->entry.resource, "RGPD_Ok") == 0) {
 		struct response	resp;
@@ -530,6 +549,10 @@ match:
 		struct hdr_nv  *phnv;
 		char	       *preferer;
 		char	       *pclen;
+		struct		res_tolog *restolog = NULL;
+
+		restolog = malloc(sizeof(struct res_tolog));
+		memset(restolog, 0, sizeof(struct res_tolog));
 
 		memset(&resp, 0, sizeof(struct response));
 		memcpy(&resp.entry, &rline->entry, sizeof(struct static_entry));
@@ -553,7 +576,7 @@ match:
 		if ((preferer = hdr_nv_value(hdrnv, "Referer")) != NULL && *preferer != '\0')
 			strncpy(phnv->value, preferer, HEADER_VALUE_SIZE - 1);
 		else
-			sprintf(phnv->value, "https://%s/Accueil", wwwhostname);
+			sprintf(phnv->value, "http://%s/Accueil", wwwhostname);
 
 		pclen = hdr_nv_value(resp.hdrnv, "Content-Length");
 		sprintf(pclen, "%lu", strlen(wwwhostname) - 1);
@@ -563,6 +586,11 @@ match:
 
 		send_data(suser, wwwhostname, strlen(wwwhostname) - 1);
 
+		restolog->method = "GET";
+		restolog->sent = strlen(wwwhostname);
+		restolog->s_code = 301;
+
+		return restolog;
 	} else if (rline->method == HTTP_GET &&
 		   strcmp(rline->entry.resource, "RGPD_Refus") == 0) {
 		struct response	resp;
@@ -571,6 +599,10 @@ match:
 		struct hdr_nv  *phnv;
 		char	       *preferer;
 		char	       *pclen;
+		struct		res_tolog *restolog = NULL;
+
+		restolog = malloc(sizeof(struct res_tolog));
+		memset(restolog, 0, sizeof(struct res_tolog));
 
 		memset(&resp, 0, sizeof(struct response));
 		memcpy(&resp.entry, &rline->entry, sizeof(struct static_entry));
@@ -595,7 +627,7 @@ match:
 		    *preferer != '\0' && strstr(preferer, wwwhostname) != NULL)
 			strncpy(phnv->value, preferer, HEADER_VALUE_SIZE - 1);
 		else
-			sprintf(phnv->value, "https://%s/Accueil", wwwhostname);
+			sprintf(phnv->value, "http://%s/Accueil", wwwhostname);
 
 		pclen = hdr_nv_value(resp.hdrnv, "Content-Length");
 		sprintf(pclen, "%lu", strlen(wwwhostname) - 1);
@@ -604,12 +636,26 @@ match:
 		static_send_header(suser, resp.hdrnv);
 
 		send_data(suser, wwwhostname, strlen(wwwhostname) - 1);
+		
+		restolog->method = "GET";
+		restolog->sent = strlen(wwwhostname);
+		restolog->s_code = 301;
+
+		return restolog;
 	} else {
 		struct response	resp;
+		struct		res_tolog *restolog = NULL;
+
+		restolog = malloc(sizeof(struct res_tolog));
+		memset(restolog, 0, sizeof(struct res_tolog));
+
 		memset(&resp, 0, sizeof(struct response));
 		memcpy(&resp.entry, &rline->entry, sizeof(struct static_entry));
 		create_response(&resp, hdrnv);
-		static_send_reply(suser, &resp);
+		restolog->sent = static_send_reply(suser, &resp);
+		restolog->method = "GET";
+		restolog->s_code = 200;
+		return restolog;
 	}
-	return 1;
+	return NULL;
 }

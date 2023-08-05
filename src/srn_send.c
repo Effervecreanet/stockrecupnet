@@ -134,6 +134,7 @@ static_send_reply(int suser, struct response *resp)
 	char		buffer[1024];
 	ssize_t		readb;
 	int		fd;
+	int		ret = 0;
 
 	phdr_clen = hdr_nv_value(resp->hdrnv, "Content-Length");
 	if (!phdr_clen)
@@ -161,10 +162,11 @@ static_send_reply(int suser, struct response *resp)
 		readb = read(fd, buffer, 1024);
 		if (readb <= 0)
 			break;
+		ret += readb;
 	} while (send_data(suser, buffer, (size_t)readb) > 0);
 
 
 	close(fd);
 
-	return 1;
+	return ret;
 }
