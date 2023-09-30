@@ -1,5 +1,4 @@
 # stockrecupnet
 Service de stockage et de récupération mobile/ordi ordi/mobile
 Adresses internet:
-http://stockrecup.net
-http://www.stockrecup.net
+http://www.effervecrea.net/cas-ou-scenarios-d-utilisations-possibles-et-intro-(stockrecup.net)
