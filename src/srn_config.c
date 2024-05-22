@@ -125,10 +125,6 @@ struct static_entry static_entries[] = {
 	},
   {
     HTTP_ALLOW_GET,
-    "google022a2661792301c1.html", "text/html", "; charset=ISO-8859-1",
-  },
-  {
-    HTTP_ALLOW_GET,
     "robots.txt", "text/plain", NULL,
   },
 	{

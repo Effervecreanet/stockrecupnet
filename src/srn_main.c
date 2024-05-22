@@ -222,7 +222,7 @@ main(int argc, char **argv)
 		return -1;
 	}
 
-	regcomp(&reg3, "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}", REG_NOSUB | REG_EXTENDED); 
+	regcomp(&reg3, "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$", REG_NOSUB | REG_EXTENDED); 
 
 	
   srand48(666663);
