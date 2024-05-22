@@ -98,7 +98,7 @@ main(int argc, char **argv)
 	struct hdr_nv	hdrnv[MAX_HEADERS];
 	struct response	resp;
 	char	       *phdr_host;
-	regex_t		reg1, reg2;
+	regex_t		reg1, reg2, reg3;
 	pid_t pid = 1, pid0 = 1;
 	char guest_down[254 + SRN_PATH_STORE_SIZE];
 	bool daemonize = false;
@@ -205,7 +205,7 @@ main(int argc, char **argv)
 
 	memset(&reg1, 0, sizeof(regex_t));
 	memset(&reg2, 0, sizeof(regex_t));
-
+	memset(&reg3, 0, sizeof(regex_t));
 	/* TLD we will accept for incoming connections */
 
 	if (regcomp(&reg1, "(...)",
@@ -221,6 +221,9 @@ main(int argc, char **argv)
 		printf("regcomp() error\n");
 		return -1;
 	}
+
+	regcomp(&reg3, "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}", REG_NOSUB | REG_EXTENDED); 
+
 	
   srand48(666663);
 
@@ -335,7 +338,9 @@ main(int argc, char **argv)
 			goto closeconn; 
 		}
 
-		if (strncasecmp(phdr_host, nakedhostname,
+		if (regexec(&reg3, phdr_host, 0, 0, 0) == 0) {
+			;
+		} else if (strncasecmp(phdr_host, nakedhostname,
 				strlen(nakedhostname)) == 0) {
 			send_moved_perm(suser);
 			set_log_date_now();
@@ -360,11 +365,12 @@ closeconn:
 		srand48(usersin.sin_port & 0xA7C7);
 
 		set_log_date_now();
-		sprintf(httplogbuf, "%s - - [%s] \"GET %s HTTP/1.1\" %d 0\n",
+		sprintf(httplogbuf, "%s - - [%s] \"GET %s HTTP/1.1\" %d %d\n",
 				inet_ntoa(usersin.sin_addr),
 			        log_date_now,
 			        rline.entry.resource,
-				result->s_code);
+				result->s_code,
+				result->sent);
 		if (result)
 			free(result);
 	}
